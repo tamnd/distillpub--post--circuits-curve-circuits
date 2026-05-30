@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1440">
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://distill.pub/template.v2.js"></script>
+</head>
+
+<body>
+  <d-front-matter><script type="text/json">
+{
+  "title": "Mạch Cong",
+  "description": "Kỹ thuật đảo ngược thuật toán phát hiện đường cong từ InceptionV1 và triển khai lại từ đầu.",
+  "authors": [
+    {
+      "author": "Nick Cammarata",
+      "authorURL": "http://nickcammarata.com",
+      "affiliation": "OpenAI",
+      "affiliationURL": "https://openai.com"
+    },
+    {
+      "author": "Gabriel Goh",
+      "authorURL": "http://gabgoh.github.io",
+      "affiliation": "OpenAI",
+      "affiliationURL": "https://openai.com"
+    },
+    {
+      "author": "Shan Carter",
+      "authorURL": "http://shancarter.com",
+      "affiliation": "Observable",
+      "affiliationURL": "https://observablehq.com"
+    },
+    {
+      "author": "Chelsea Voss",
+      "authorURL": "https://twitter.com/cvoss",
+      "affiliation": "OpenAI",
+      "affiliationURL": "https://openai.com"
+    },
+    {
+      "author": "Ludwig Schubert",
+      "authorURL": "https://schubert.io/",
+      "affiliation": "",
+      "affiliationURL": "https://openai.com"
+    },
+    {
+      "author": "Chris Olah",
+      "authorURL": "https://colah.github.io",
+      "affiliation": "",
+      "affiliationURL": "https://openai.com"
+    }
+  ]
+}
+</script></d-front-matter>
+
+  <d-title>
+    <h1>Mạch Cong</h1>
+    <p style="font-size: 1.4rem; margin-bottom: -5px">
+      Chúng tôi tiến hành kỹ thuật đảo ngược một thuật toán học không tầm thường từ trọng số của một
+      mạng neural và sử dụng các ý tưởng cốt lõi của nó để tạo ra một 
+      <i>mạng neural nhân tạo nhân tạo</i> từ đầu nhằm triển khai lại
+      thuật toán đó.
+    </p>
+    <div
+    style="display: flex; flex-flow: column; grid-column: screen; align-items: center; align-self:center;padding-top:20px; background: rgb(252, 252, 252); margin-top: 40px; border-top: 1px solid rgba(0, 0, 0, 0.1);"
+  >
+    <div
+      style="display: grid; align-self:center; flex-flow: column; grid-template-columns: [natural] 500px [aann] 500px; grid-template-rows: [label] auto [figure] auto; grid-gap: 20px;"
+    >
+      <div
+      style="border-bottom: 1px solid rgba(0, 0, 0, 0.1); padding-bottom: 3px; grid-column: aann; padding-left: 3px; font-size: 18px; grid-row: label;"
+      >
+        Neuron Đường Cong Nhân Tạo
+  </div>
+      <div
+      style="border-bottom: 1px solid rgba(0, 0, 0, 0.1); padding-bottom: 3px; grid-column: natural; padding-left: 3px; font-size: 18px; grid-row: label;"
+      >
+        Neuron Đường Cong Tự Nhiên InceptionV1
+      </div>
+      <img
+        src="banner-artificial.png"
+        style="grid-row: figure; grid-column: aann; width: 500px; mix-blend-mode: darken;"
+      />
+      <img
+        src="banner-natural.png"
+        style="grid-row: figure; grid-column: natural; width: 500px; mix-blend-mode: darken;"
+      />
+    </div>
+    <figcaption
+    style="align-self: center; margin-top: 20px; margin-bottom: 25px; width: 704px"
+    >
+      Chúng ta có thể so sánh các bộ phát hiện đường cong trong một mạng neural do chúng tôi tự thiết kế
+      với các bộ phát hiện đường cong trong InceptionV1 bằng cách đo mức độ kích hoạt của chúng
+      đối với các kích thích đường cong tổng hợp. Chúng tôi nhận thấy rằng trên một phạm vi bán kính và
+      hướng khác nhau, các neuron đường cong nhân tạo của chúng tôi gần đúng với các neuron tự nhiên.
+    </figcaption>
+    </div>
+
+</d-title>
+
+  <d-article>
+  </d-article>
+
+  <d-appendix>
+    <d-footnote-list></d-footnote-list>
+    <d-citation-list></d-citation-list>
+
+<h3>Đóng Góp của Tác Giả</h3>
+
+    <p>Như chúng tôi đã đề cập trong Mạch Phát Hiện Đường Cong, nghiên cứu đầu tiên của chúng tôi về các neuron đường cong, rất khó để tách riêng đóng góp của từng tác giả giữa các bài báo khác nhau trong dự án Circuits. Phần lớn nghiên cứu gốc về neuron đường cong được thực hiện trước khi chúng tôi quyết định tách các ấn phẩm thành hành vi của neuron đường cong và cách chúng được xây dựng. Trong phần này, chúng tôi đã cố gắng cô lập các đóng góp cụ thể liên quan đến cơ chế của các neuron đường cong.</p>
+
+<p><b>Thiết Kế Giao Diện & Nguyên Mẫu.</b> Nhiều sơ đồ trọng số được Chris nguyên mẫu đầu tiên trong các nghiên cứu ban đầu về các họ neuron khác nhau trong thị giác sơ khai, và một số trong đó đã được chuyển thành các bài thuyết trình. Nick mở rộng chúng để sử dụng trong bài báo này. Chris thiết kế và triển khai hình minh họa phân rã đặc trưng trong phần đầu tiên. Nhiều giao diện khác được Nick thiết kế với sự hỗ trợ của Shan và Chris. Cụ thể, Shan giúp thiết kế hình minh họa cho thấy cách các họ neuron thị giác sơ khai kết nối dẫn đến họ neuron đường cong.</p>
+
+<p><b>Đóng Góp Khái Niệm.</b> Những hiểu biết đầu tiên về cách neuron đường cong được xây dựng từ các đường thẳng và cạnh đến từ Chris, và các chi tiết được làm rõ qua nghiên cứu thêm của Nick. Nick nghiên cứu kỹ các họ đường, bao gồm phát hiện neuron đường vách đá và nghiên cứu cách chúng được sử dụng. Nick nghiên cứu các họ neuron trong các lớp sớm, xem xét cách neuron hình dạng dần dần kết hợp các neuron kết cấu và neuron mỹ thuật ngày càng tinh vi, hướng tới sơ đồ các họ neuron trong phần đầu tiên. Mạng neural nhân tạo nhân tạo được thực hiện bởi Chris và Nick mở rộng để sử dụng trong bài báo. Gabe đóng vai trò quan trọng trong việc phát hiện nhiều kỹ thuật được sử dụng để nghiên cứu kỹ lưỡng Circuits, và cung cấp các góp ý và đề xuất ở nhiều bước trong quá trình nghiên cứu mạch đường cong.</p>
+
+<p><b>Viết Bài.</b> Nick và Chris viết nội dung bài báo với sự hỗ trợ chỉnh sửa đáng kể từ Chelsea.</p>
+
+<p><b>Cơ Sở Hạ Tầng.</b> Nick xây dựng cơ sở hạ tầng để trích xuất hình minh họa từ bài báo nhằm tái hiện trong Colab. Ludwig chịu trách nhiệm về cơ sở hạ tầng phân tán được sử dụng cho nhiều thí nghiệm.</p>
+
+<h3>Lời Cảm Ơn</h3>
+
+<p>Bài báo của chúng tôi được cải thiện đáng kể nhờ phản hồi chi tiết từ Patricia Robinson, Jennifer Lin, Adam Shimi, Sam Havens, Stefan Sietzen, Dave Vladman, Maxim Liu, Fred Hohman, Vincent Tjeng, và Humza Iqbal.</p>
+
+<p>Chúng tôi cũng rất trân trọng các cuộc trò chuyện trong kênh #circuits của <a href="http://slack.distill.pub/">Distill Slack</a> mở, tại thời điểm xuất bản có hơn 600 người tham gia.</p>
+
+</d-appendix>
+
+  <d-bibliography src="bibliography.bib"></d-bibliography>
+  <script src="https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js"></script>
+  <script src="index.js"></script>
+</body>
